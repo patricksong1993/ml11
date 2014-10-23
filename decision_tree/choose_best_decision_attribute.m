@@ -43,7 +43,7 @@ for possible_value = 0:1
     
     positive_new = length(reduced_targets(reduced_targets == 1));
     negative_new = length(reduced_targets(reduced_targets == 0));
-    remainder = remainder + (positive_new + negative_new) * calculate_remainder(positive_new, negative_new);
+    remainder = remainder + (positive_new + negative_new) * calculate_entropy(positive_new, negative_new);
 end
 
 remainder = remainder / (positive + negative);
