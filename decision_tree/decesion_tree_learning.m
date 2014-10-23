@@ -16,14 +16,14 @@ else if isempty(attributes)
         
         for possible_value = 0:1
             %row numbers with the best attribute equals to possible value.
-            rows_of_best = find(examples(:,best) == possible_value);
-            reduced_examples = examples(rows_of_best, :);
+            rows_on_best = find(examples(:,best_attribute) == possible_value);
+            reduced_examples = examples(rows_on_best, :);
             if isempty(reduced_examples)
                 tree.op = [];
                 tree.kids = [];
                 tree.class = majority_value(binary_targets);
             else
-                reduced_targets = targets(rows_of_best);
+                reduced_targets = targets(rows_on_best);
                 tree.kids{possible_value} = decision_tree_learning(reduced_examples, attributes(attributes ~= best), reduced_targets);
             end
         end
