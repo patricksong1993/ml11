@@ -1,4 +1,4 @@
-function[best_attribute] = choose_best_decision_attribute(examples, attributes, binary_targets)
+function [best_attribute] = choose_best_decision_attribute(examples, attributes, binary_targets)
 
 positive = length(binary_targets(binary_targets == 1));
 negative = length(binary_targets(binary_targets == 0));
@@ -20,7 +20,7 @@ best_attribute = attributes(index);
 end
 
 
-function[entropy] = calculate_entropy(positive, negative)
+function [entropy] = calculate_entropy(positive, negative)
 
 total = positive + negative;
 positive_factor = positive / total;
@@ -32,7 +32,7 @@ entropy = - positive_factor * log2(positive_factor) - negative_factor * log2(neg
 end
 
 
-function[remainder] = calculate_remainder(positive, negative, index, examples, attributes, binary_targets)
+function [remainder] = calculate_remainder(positive, negative, index, examples, attributes, binary_targets)
 
 remainder = 0;
 
