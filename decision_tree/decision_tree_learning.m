@@ -21,7 +21,7 @@ else
         else
             reduced_targets = binary_targets(rows_on_best);
             attributes(best_attribute) = 0;
-            tree.kids{possible_value + 1} = decision_tree_learning(reduced_examples, attributes, reduced_targets);
+            tree.kids{possible_value + 1} = decision_tree_learning(reduced_examples, attributes(attributes~=best_attribute), reduced_targets);
         end
     end
 end
