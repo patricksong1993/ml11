@@ -1,10 +1,12 @@
 function [best_attribute] = choose_best_decision_attribute(examples, attributes, binary_targets)
 
-total = length(binary_targets);
 positive = length(binary_targets(binary_targets == 1));
-negative = total - positive;
+negative = length(binary_targets(binary_targets == 0));
+sum = length(binary_targets);
+positive = sum(binary_targets);
+negative = sum - 
 
-original_entropy = calculate_entropy(positive, negative);
+original_gain = calculate_entropy(positive, negative);
 
 gains = zeros(1, length(attributes));
 
@@ -32,7 +34,7 @@ for i = 1:length(attributes)
             end
         end
         
-        gains(i) = calculate_gain(original_entropy, total, positive_zero, positive_one, negative_zero, negative_one);
+        gains(i) = calculate_gain(original_gain, sum, positive_zero, positive_one, negative_zero, negative_one);
     end
 end
 
@@ -43,28 +45,26 @@ end
 
 function [entropy] = calculate_entropy(positive, negative)
 
-if(positive > 0 && negative > 0)
-    total = positive + negative;
-    positive_factor = positive / total;
-    negative_factor = negative / total;
-    entropy = - positive_factor * log2(positive_factor) - negative_factor * log2(negative_factor);
-else
-    entropy = 0;
-end
+total = positive + negative;
+positive_factor = positive / total;
+negative_factor = negative / total;
+
+%abs??
+entropy = - positive_factor * log2(positive_factor) - negative_factor * log2(negative_factor);
 
 end
 
 
-function [gain] = calculate_gain(original_entropy, total, positive_zero, positive_one, negative_zero, negative_one)
-    remainder = calculate_remainder(total, positive_zero, positive_one, negative_zero, negative_one);
-    gain = original_entropy - remainder;
+function [gain] = calculate_gain(original_gain, sum, positive_zero, positive_one, negative_zero, negative_one)
+    remainder = calculate_remainder(sum, positive_zero, positive_one, negative_zero, negative_one);
+    gain = original_gain - remainder;
 end
 
 
-function [remainder] = calculate_remainder(total, positive_zero, positive_one, negative_zero, negative_one)
+function [remainder] = calculate_remainder(sum, positive_zero, positive_one, negative_zero, negative_one)
 
-zero = (positive_zero + negative_zero) / total;
-one  = (positive_one + negative_one) /total;
+zero = (positive_zero + negative_zero) / sum;
+one  = (positive_one + negative_one) /sum;
 remainder = zero * (calculate_entropy(positive_zero, negative_zero)) + one * (calculate_entropy(positive_one, negative_one));
 
 end
