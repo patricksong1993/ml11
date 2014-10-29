@@ -8,36 +8,37 @@ original_entropy = calculate_entropy(positive, negative);
 
 gains = zeros(1, length(attributes));
 
+%number on index is not equal to index
 for i = 1:length(attributes)
-    if (attributes(i) == 0)
-        gains(i) = -1;
-    else
+        
+        %
+        value_on_i = attributes(i);
         positive_zero = 0;
         positive_one = 0;
         negative_zero = 0;
         negative_one = 0;
         
         for j = 1:length(binary_targets)
-            if(examples(j,i) == 0 && binary_targets(j) == 1)
+            if(examples(j,value_on_i) == 0 && binary_targets(j) == 1)
                 positive_zero = positive_zero + 1;
             end 
-            if(examples(j,i) == 1 && binary_targets(j) == 1)
+            if(examples(j,value_on_i) == 1 && binary_targets(j) == 1)
                 positive_one = positive_one + 1;
             end
-            if(examples(j,i) == 0 && binary_targets(j) == 0)
+            if(examples(j,value_on_i) == 0 && binary_targets(j) == 0)
                 negative_zero = negative_zero + 1;
             end
-            if(examples(j,i) == 1 && binary_targets(j) == 0)
+            if(examples(j,value_on_i) == 1 && binary_targets(j) == 0)
                 negative_one = negative_one + 1;
             end
         end
         
         gains(i) = calculate_gain(original_entropy, total, positive_zero, positive_one, negative_zero, negative_one);
-    end
+%    end
 end
 
-[~,best_attribute] = max(gains);
-
+[~,index] = max(gains);
+best_attribute = attributes(index);
 end
 
 

@@ -11,16 +11,17 @@ elseif (sum(attributes) == 0)
 % Normal case
 else
     best_attribute = choose_best_decision_attribute(examples, attributes, binary_targets);
-    tree = make_node(best_attribute, '');
+    
     for possible_value = 0:1
         %row numbers with the best attribute equals to possible value
         rows_on_best = find(examples(:,best_attribute) == possible_value);
         reduced_examples = examples(rows_on_best, :);
         if (isempty(reduced_examples))
-            tree.kids{possible_value + 1} = make_node('', majority_value(binary_targets));
+            tree = make_node('', majority_value(binary_targets));
         else
             reduced_targets = binary_targets(rows_on_best);
-            attributes(best_attribute) = 0;
+            tree = make_node(best_attribute, '');
+            %Delete used attribute
             tree.kids{possible_value + 1} = decision_tree_learning(reduced_examples, attributes(attributes~=best_attribute), reduced_targets);
         end
     end
