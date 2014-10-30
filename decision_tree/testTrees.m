@@ -1,7 +1,7 @@
 function predictions = testTrees(T,x2)
 
-%depth first;
+% Default strategy is maximum depth
 strategy = 1;
-predictions = validate(T,x2,strategy);
+predictions = evaluate(T,x2,strategy);
 
 end
