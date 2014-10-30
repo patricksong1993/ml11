@@ -10,4 +10,4 @@ for i = 1:6
     result(i, 1) = tp/(tp + fn);
     result(i, 2) = tp/(tp + fp);
 end
-en
+end
