@@ -16,14 +16,13 @@ if total == 1
     [result] = find(boolean, 1);
 else
 switch strategy
-    case 1
+    case 3
         % Maximum Depth
-        [~, result] = max(depth);
-        
+        [~, result] = max(depth);    
     case 2
         % Minimum Depth
         [~, result] = min(depth);
-    case 3
+    case 1
         % Randomized
         if total == 0
             result = randi(6);
@@ -32,54 +31,8 @@ switch strategy
             random = randi(length(indexes));
             result = indexes(random);
         end
-    case 4
-        % Last Come, First Serve
-        if total == 0
-            result = randi(6);
-        else
-            indexes = find(boolean);
-            result = indexes(length(indexes));
-        end
     case 5
-        % f1 measure rank
-        if total == 0
-            result = randi(6);
-        else            
-            if boolean(4) == 1
-                result = 4;
-            elseif boolean(6) == 1
-                result = 6;
-            elseif boolean(2) == 1
-                result = 2;
-            elseif boolean(3) == 1
-                result = 3;
-            elseif boolean(5) == 1
-                result = 5;
-            elseif boolean(1) == 1
-                result = 1;
-            end
-        end
-    case 6
-        % rank2
-        if total == 0
-            result = randi(6);
-        else            
-            if boolean(1) == 1
-                result = 1;
-            elseif boolean(5) == 1
-                result = 5;
-            elseif boolean(3) == 1
-                result = 3;
-            elseif boolean(2) == 1
-                result = 2;
-            elseif boolean(6) == 1
-                result = 6;
-            elseif boolean(4) == 1
-                result = 4;
-            end
-        end
-    case 7
-        % bestmax depth with randi
+        % Maximum Depth with Maximum Nodes
         max_depth = max(depth);
         for i = 1:6
             if depth(i) ~= max_depth;
@@ -100,8 +53,50 @@ switch strategy
                 result = index_with_max_depth(k);
             end
         end
+    case 4
+        % Maximum Depth with Minimum Nodes
+        max_depth = max(depth);
+        for i = 1:6
+            if depth(i) ~= max_depth;
+                depth(i) = 0;
+            end
+        end
+        index_with_max_depth = find(depth);
         
-                
+        nodes = zeros(length(index_with_max_depth),1);
+        
+        for j = 1:length(index_with_max_depth)
+            nodes(j) = count_nodes(all_trees(index_with_max_depth(j)));
+        end
+        choose_one = min(nodes);
+        
+        for k=1:length(index_with_max_depth)
+            if nodes(k) == choose_one
+                result = index_with_max_depth(k);
+            end
+        end
+    case 5
+        % Maximum Depth with Minimum Nodes
+        max_depth = max(depth);
+        for i = 1:6
+            if depth(i) ~= max_depth;
+                depth(i) = 0;
+            end
+        end
+        index_with_max_depth = find(depth);
+        
+        nodes = zeros(length(index_with_max_depth),1);
+        
+        for j = 1:length(index_with_max_depth)
+            nodes(j) = count_nodes(all_trees(index_with_max_depth(j)));
+        end
+        choose_one = max(nodes);
+        
+        for k=1:length(index_with_max_depth)
+            if nodes(k) == choose_one
+                result = index_with_max_depth(k);
+            end
+        end
 end
 end       
 end
