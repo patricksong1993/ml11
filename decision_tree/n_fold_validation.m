@@ -8,7 +8,7 @@ end
 predicted_results = cell(1,n);
 confusion_matrices = cell(1,n);
 
-for i = 1:10
+for i = 1:n
     % Split dataset
     [train_set, test_set] = split_dataset(i, examples, targets);
     % Train desicion trees on train set datas
