@@ -28,6 +28,13 @@ elseif strcmp(train_func,'trainscg')
     net.trainParam.lr = lr;
     net.trainParam.goal = goal;
     net.trainParam.min_grad = grad;
+elseif strcmp(train_func,'traingda')
+    lr = param1;
+    lr_inc = param2;
+    lr_dec = param3;
+    net.trainParam.lr = lr;
+    net.trainParam.lr_inc = lr_inc;
+    net.trainParam.lr_dec = lr_dec;
 end
 
 
