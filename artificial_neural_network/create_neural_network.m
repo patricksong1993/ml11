@@ -1,29 +1,35 @@
-function net = create_neural_network(x,y,layers,neurons,training_func,lr)
+function net = create_neural_network(x,y,hidden_network,train_func,param1,param2,param3)
 
-hidden_network = neurons*ones(1,layers);
-net = feedforwardnet(hidden_network, training_func);
+if nargin < 6
+    param2 = 0;
+    param3 = 0;
+end
+
+
+layers = size(hidden_network,2);
+net = feedforwardnet(hidden_network, train_func);
 net = configure(net, x, y);
-
 for i = 1:layers
     net.layers{i}.transferFcn = 'tansig';
 end
-
-net.trainParam.lr = lr;
-% net.trainParam.goal = goal;
-% net.trainParam.min_grad = grad;
-
-% dividerand?
-net.divideFcn = 'divideind';
-% just train and val?
-net.divideParam.trainInd = 1:800;
-net.divideParam.valInd = 801:size(x,2);
-net.divideParam.testInd = [];
-
-
+net.divideFcn = 'divideblock';
+net.divideParam.trainRatio = 0.8;
+net.divideParam.valRatio = 0.2;
+net.divideParam.testRatio = 0;
 net.trainParam.epochs = 10000;
-net.trainParam.delt_inc = 1.2;
 
-net.trainParam.delt_dec = 0.9;
+if strcmp(train_func,'traingd')
+    lr = param1;
+    net.trainParam.lr = lr;
+elseif strcmp(train_func,'trainscg')
+    lr = param1;
+    goal = param2;
+    grad = param3;
+    net.trainParam.lr = lr;
+    net.trainParam.goal = goal;
+    net.trainParam.min_grad = grad;
+end
+
 
 
 net = train(net,x,y);
