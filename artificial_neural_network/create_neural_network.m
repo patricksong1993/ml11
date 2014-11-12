@@ -4,6 +4,9 @@ if nargin < 6
     param2 = 0;
     param3 = 0;
 end
+if nargin < 7
+    param3 = 0;
+end
 
 
 layers = size(hidden_network,2);
@@ -13,10 +16,10 @@ for i = 1:layers
     net.layers{i}.transferFcn = 'tansig';
 end
 net.divideFcn = 'divideblock';
-net.divideParam.trainRatio = 0.8;
-net.divideParam.valRatio = 0.2;
+net.divideParam.trainRatio = 0.9;
+net.divideParam.valRatio = 0.1;
 net.divideParam.testRatio = 0;
-net.trainParam.epochs = 10000;
+net.trainParam.epochs = 1000;
 
 if strcmp(train_func,'traingd')
     lr = param1;
@@ -35,6 +38,16 @@ elseif strcmp(train_func,'traingda')
     net.trainParam.lr = lr;
     net.trainParam.lr_inc = lr_inc;
     net.trainParam.lr_dec = lr_dec;
+elseif strcmp(train_func,'traingdm')
+    lr = param1;
+    mc = param2;
+    net.trainParam.lr = lr;
+    net.trainParam.mc = mc;
+elseif strcmp(train_func,'trainrp')
+    delt_inc = param1;
+    delt_dec = param2;
+    net.trainParam.delt_inc = delt_inc;
+    net.trainParam.delt_dec = delt_dec;
 end
 
 

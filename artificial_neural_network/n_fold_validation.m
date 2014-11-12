@@ -1,10 +1,15 @@
 % origin format expected as input.
-function [net,confusion_matrices] = n_fold_validation(examples,targets,hidden_network,train_func,param1,param2,param3)
+function [confusion_matrices,net] = n_fold_validation(examples,targets,hidden_network,train_func,param1,param2,param3)
 
 if nargin < 6
     param2 = 0;
     param3 = 0;
 end
+
+if nargin < 7
+    param3 = 0;
+end
+
 
 n = 10;
 
