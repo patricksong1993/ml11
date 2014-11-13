@@ -1,12 +1,12 @@
 function result = optimise_trainscg(x,y)
-result = zeros(11,10);
+result = zeros(11,11);
 
 index_goal = 1;
 
 for i = 0:0.001:0.01
     index_grad = 1;
-    for j = 1e-6:1e-6:1e-5
-        [mat,~] = n_fold_validation(x,y,[20],'trainscg',0.6,i,j);
+    for j = 0:1e-6:1e-5
+        [mat,~] = n_fold_validation(x,y,[20],'trainscg',0.7,i,j);
         mat = combine_confusion_matrix(mat);
         cr = classification_rate_over_confusion_matrix(mat);
         result(index_goal,index_grad) = cr;

@@ -1,10 +1,10 @@
 function result = optimise_traingdm(x,y)
-result = zeros(11,10);
+result = zeros(9,1);
 
 index_mc = 1;
 
-for i = 0.8:0.05:1 
-    [mat,~] = n_fold_validation(x,y,[20],'traingdm',0.6,i);
+for i = 0.8:0.025:1 
+    [mat,~] = n_fold_validation(x,y,[20],'traingdm',0.7,i);
     mat = combine_confusion_matrix(mat);
     cr = classification_rate_over_confusion_matrix(mat);
     result(index_mc,1) = cr;

@@ -1,19 +1,12 @@
-function result = optimise(x,y)
-result = zeros(11,10);
+function [traingd,traingda,traingdm,trainrp,trainscg,topology] = optimise(x,y)
 
-index_goal = 1;
+traingd = optimise_traingd(x,y);
+traingda = optimise_traingda(x,y);
+traingdm = optimise_traingdm(x,y);
+trainrp = optimise_trainrp(x,y);
+trainscg = optimise_trainscg(x,y);
+topology = optimise_topology(x,y);
 
-for i = 0:0.001:0.01
-    index_grad = 1;
-    for j = 1e-6:1e-6:1e-5
-        [mat,~] = n_fold_validation(x,y,[25,25],'trainscg',0.01,i,j);
-        mat = combine_confusion_matrix(mat);
-        cr = classification_rate_over_confusion_matrix(mat);
-        result(index_goal,index_grad) = cr;
-        index_grad = index_grad + 1;
-    end
-    index_goal = index_goal + 1;
-end
 end
 
 
