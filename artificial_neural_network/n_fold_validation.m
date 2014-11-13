@@ -1,5 +1,5 @@
 % origin format expected as input.
-function [confusion_matrices,net] = n_fold_validation(examples,targets,hidden_network,train_func,param1,param2,param3)
+function [cr,confusion_matrices,net] = n_fold_validation(examples,targets,hidden_network,train_func,param1,param2,param3)
 
 if nargin < 6
     param2 = 0;
@@ -15,6 +15,7 @@ n = 10;
 
 confusion_matrices = cell(1,n);
 net = cell(1,n);
+cr = cell(1,n);
 
 for i = 1:n
     
@@ -26,8 +27,10 @@ for i = 1:n
     predictions = testANN(temp_net, test_set.examples');
     
     confusion_matrices{i} = confusion_matrix(test_set.targets,predictions);
+    cr{i} = classification_rate_over_confusion_matrix(confusion_matrices{i});
     net{i} = temp_net;
     
+end
 end
 
     
