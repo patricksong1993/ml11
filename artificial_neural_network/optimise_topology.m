@@ -1,7 +1,7 @@
 function result = optimise_topology(x,y)
 result = zeros(5,51);
 
-for i = 0:1:50
+for i = 1:1:50
         [mat,~] = n_fold_validation(x,y,[i],'traingd',0.7);
         mat = combine_confusion_matrix(mat);
         cr = classification_rate_over_confusion_matrix(mat);
