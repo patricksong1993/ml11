@@ -15,8 +15,8 @@ for i = 1:0.02:1.2
     for j = 0.4:0.05:0.8
         [cr,mat,~] = n_fold_validation(x,y,[20],'traingda',0.7,i,j);
         for k = 1:10
-          folds_cr{k}.result(index_inc,index_dec) = cr{j};
-          folds_cm{k}.result{index_inc,index_dec} = mat{j};
+          folds_cr{k}.result(index_inc,index_dec) = cr{k};
+          folds_cm{k}.result{index_inc,index_dec} = mat{k};
         end
         index_dec = index_dec + 1;
     end
