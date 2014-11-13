@@ -15,8 +15,8 @@ for i = 0:0.001:0.01
     for j = 0:1e-6:1e-5
         [cr,mat,~] = n_fold_validation(x,y,[20],'trainscg',0.7,i,j);
         for k = 1:10
-          folds_cr{k}.result(index_inc,index_dec) = cr{k};
-          folds_cm{k}.result{index_inc,index_dec} = mat{k};
+          folds_cr{k}.result(index_goal,index_grad) = cr{k};
+          folds_cm{k}.result{index_goal,index_grad} = mat{k};
         end
         index_grad = index_grad + 1;
     end

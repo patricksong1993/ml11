@@ -10,7 +10,7 @@ end
 
 index_lr = 1;
 
-for i = 0.3:0.05:0.9 
+for i = 0:0.025:1
 
     [cr,mat,~] = n_fold_validation(x,y,[20],'traingd',i);
     
