@@ -25,7 +25,3 @@ function cbr = CBRinit(x,y)
     end
     cbr = cbr(1:count);
 end
-
-function c = inc_typicality(c)
-    c.typicality = c.typicality + 1;
-end

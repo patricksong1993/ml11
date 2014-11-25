@@ -5,7 +5,8 @@ function distance = calculate_distance(a,b,method)
     elseif method == 2
         distance = calculate_distance_euclidean(a,b);
     elseif method == 3
-        % to implement
+        distance = calculate_distance_chebyshev(a,b);
+    else
         distance = 0;
     end
 end
@@ -17,5 +18,10 @@ end
 function distance = calculate_distance_euclidean(a,b)
     distance = sum(abs(a-b));
     distance = sqrt(distance);
+end
+
+function distance = calculate_distance_chebyshev(a,b)
+    distance = abs(a-b);
+    distance = max(distance);
 end
 
