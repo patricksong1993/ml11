@@ -1,6 +1,7 @@
 function solvedcase = reuse(casE,newcase)
+    
     solvedcase = casE;
     solvedcase.au = newcase;
-    
-    %implement, if distance != 0, typicality = 0;
+    solvedcase.typicality = 1;  %to be dealt with in retain
+
 end

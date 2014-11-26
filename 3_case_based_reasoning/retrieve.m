@@ -1,4 +1,4 @@
-function casE = retrieve(cbr, newcase, retrieve_method) % 'case' name taken
+function [casE, distance, index] = retrieve(cbr, newcase, retrieve_method) % 'case' name taken
 
     if nargin < 3
         retrieve_method = 1;
@@ -17,12 +17,14 @@ function casE = retrieve(cbr, newcase, retrieve_method) % 'case' name taken
             if current_distance < closest_distance
                 closest_case = cbr(i);
                 closest_distance = current_distance;
+                index = i;
             end
         end
     end
     
     
     casE = closest_case;
+    distance = closest_distance;
 
 
 end
