@@ -1,9 +1,12 @@
-function cbr = retain(cbr, solvedcase, distance, closestcase_index)
-    no_cbr = size(cbr, 1);
-    
-    if distance > 0      
-        cbr(no_cbr + 1) = solvedcase;
-    elseif distance == 0
-            inc_typicality(cbr(closestcase_index));        
+function cbr = retain(cbr, newcase)
+
+    for i = 1:size(cbr,1)
+        if (all(cbr(i).au == newcase.au) && cbr(i).class == newcase.class)
+            inc_typicality(cbr(i));
+            return;
+        end
     end
+    
+    cbr(size(cbr,1)+1) = newcase;
+    
 end

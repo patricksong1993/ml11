@@ -1,5 +1,10 @@
 function distance = calculate_distance(a,b,method)
 
+    if nargin < 3
+        method = 1;
+    end
+    
+    
     if method == 1
         distance = calculate_distance_manhattan(a,b);
     elseif method == 2
