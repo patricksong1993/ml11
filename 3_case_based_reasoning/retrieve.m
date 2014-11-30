@@ -17,10 +17,10 @@ function [casE, distances] = retrieve(cbr, newcase) % 'case' name taken
         casE(i) = cbr(distances(i,1));
     end
     
-    while(distances(k,2) == distances(k+1,2))
-        k = k+1;
-        casE(k) = cbr(distances(k,1));
-    end
+%     while(distances(k,2) == distances(k+1,2))
+%         k = k+1;
+%         casE(k) = cbr(distances(k,1));
+%     end
     
     distances = distances(1:k,2);
     

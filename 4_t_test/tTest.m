@@ -12,17 +12,17 @@ function t_matrix = tTest(dt,ann,cbr)
     cbr = error_rate(cbr);
     
     for i = 1:6
-        [h,p,ci,stats] = ttest2(dt(i, :), ann(i, :), 'alpha', 0.1);
+        [h,p,ci,stats] = ttest2(dt(i, :), ann(i, :), 'alpha', 0.01667);
         t_matrix(i, 1) = make_node(h, p, ci, stats);
     end
 
     for i = 1:6
-        [h,p,ci,stats] = ttest2(dt(i, :), cbr(i, :), 'alpha', 0.1);
+        [h,p,ci,stats] = ttest2(dt(i, :), cbr(i, :), 'alpha', 0.01667);
         t_matrix(i, 2) = make_node(h, p, ci, stats);
     end
 
     for i = 1:6
-        [h,p,ci,stats] = ttest2(ann(i, :), cbr(i, :), 'alpha', 0.1);
+        [h,p,ci,stats] = ttest2(ann(i, :), cbr(i, :), 'alpha', 0.01667);
         t_matrix(i, 3) = make_node(h, p, ci, stats);
     end
     
