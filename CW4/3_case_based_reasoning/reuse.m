@@ -48,16 +48,16 @@ function newcase = reuse(cases,newcase,cbr)
     
     [max_score1, max_index1] = max(scores);
     newcase.class = max_index1;
-%     scores(max_index1) = [];
-%     max_score2 = max(scores);
+    scores(max_index1) = [];
+    max_score2 = max(scores);
 %     
-%     if(max_score1 ~= max_score2)
-% %         newcase.class = max_index1;
-%         return;
-%     end
+    if(max_score1 ~= max_score2)
+        newcase.class = max_index1;
+        return;
+    end
 %     
 %     % trim
-%     newcase = reuse(cases(1:size_cases-1),newcase,cbr);
+    newcase = reuse(cases(1:size_cases-1),newcase,cbr);
     
         
     
