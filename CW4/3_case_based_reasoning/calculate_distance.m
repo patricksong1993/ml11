@@ -33,7 +33,24 @@ function distance = calculate_distance_chebyshev(a,b)
 end
 
 function distance = calculate_distance_jaccard(a,b)
-    intersection = intersect(a, b) ;
-    union1 = union(a, b) ;
-    distance = length(intersection) / length(union1);
+    count1 = 1;
+    count2 = 1;
+    ai = zeros(45);
+    bi = zeros(45);
+    for i = 1:45
+        if(a(i)==1)
+            ai(count1)=i;
+            count1 = count1+1;
+        end
+    end
+    for j = 1:45
+        if(b(j)==1)
+            bi(count2)=j;
+            count2 = count2+1;
+        end
+    end
+    
+    intersection = length(intersect(ai, bi))-1 ;
+    union1 = length(union(ai, bi))-1 ;
+    distance = 1-(intersection / union1);
 end
